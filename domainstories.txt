@@ -56,3 +56,13 @@ irb
 Dir["./lib/*.rb"].each { |file| require file }
 station = DockingStation.new
 station.release_bike
+
+As a system maintainer,
+So that I can plan the distribution of bikes,
+I want a docking station to have a default capacity of 20 bikes.
+
+Feature test
+irb
+Dir["./lib/*.rb"].each { |file| require file }
+station = DockingStation.new
+20.times { station.dock Bike.new }
