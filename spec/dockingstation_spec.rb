@@ -51,6 +51,14 @@ describe DockingStation do
  
     end
         it "should have a default capacity of 20" do
-            expect(subject.capacity).to eq 20
+            expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
         end
+    
+    describe "initialization" do
+        it "has a variable capacity" do
+            docking_station = DockingStation.new(50)
+            50.times {docking_station.dock(Bike.new)}
+            expect {docking_station.dock(Bike.new)}.to raise_error "Station full"
+        end
+    end
 end
