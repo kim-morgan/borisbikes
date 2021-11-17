@@ -32,6 +32,11 @@ describe DockingStation do
             expect {subject.release_bike}.to raise_error "No bikes available"
         end
     end
+
+    it "Creates a station with a user defined capacity" do
+        expect{DockingStation.new(1,2)}.to raise_error(ArgumentError)
+    end
+
     describe "#dock" do
         it "docks something" do
             bike = Bike.new
@@ -40,10 +45,12 @@ describe DockingStation do
 
         it "raises an error when there is already 20 bikes at the docking station" do
             station = DockingStation.new
-            20.times { station.dock Bike.new }
+            station.capacity.times { station.dock Bike.new }
             expect {station.dock(Bike.new)}.to raise_error "Station full"
         end
  
     end
-	
+        it "should have a default capacity of 20" do
+            expect(subject.capacity).to eq 20
+        end
 end
